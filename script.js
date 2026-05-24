@@ -2,11 +2,25 @@
 const products = [
     { id: 1, name: "Кофемашина Barista Pro", price: 45000, image: "images/espresso-machine-thumb.jpg", link: "espresso-machine.html" },
     { id: 2, name: "Кофемолка GrindMaster", price: 18000, image: "images/coffee-grinder-thumb.jpg", link: "coffee-grinder.html" },
-    { id: 3, name: "Набор бариста Barista Kit", price: 8500, image: "images/barista-kit.jpg", link: "barista-kit.html" }
+    { id: 3, name: "Набор бариста Barista Kit", price: 8500, image: "images/barista-kit-thumb.jpg", link: "barista-kit.html" }
 ];
 
 // Массив корзины
 let cart = [];
+
+// Функция сохранения корзины в LocalStorage
+const saveCartToLocalStorage = () => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+};
+
+// Функция загрузки корзины из LocalStorage
+const loadCartFromLocalStorage = () => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCart();
+    }
+};
 
 // Функция подсчета цены (стрелочная)
 const calculateTotal = () => cart.reduce((sum, item) => sum + item.price, 0);
@@ -37,6 +51,7 @@ const updateCart = () => {
             const id = parseInt(btn.dataset.id);
             cart = cart.filter(item => item.id !== id);
             updateCart();
+            saveCartToLocalStorage();  // Сохраняем после удаления
             alert('Товар удален из корзины');
         };
     });
@@ -46,6 +61,7 @@ const updateCart = () => {
 const addToCart = (product) => {
     cart.push(product);
     updateCart();
+    saveCartToLocalStorage();  // Сохраняем после добавления
     alert(`${product.name} добавлен в корзину`);
 };
 
@@ -56,6 +72,7 @@ const clearCart = () => {
     } else {
         cart = [];
         updateCart();
+        saveCartToLocalStorage();  // Сохраняем после очистки
         alert('Корзина очищена');
     }
 };
@@ -69,6 +86,7 @@ const checkout = () => {
         alert(`Покупка прошла успешно! Сумма: ${total} ₽`);
         cart = [];
         updateCart();
+        saveCartToLocalStorage();  // Сохраняем после оплаты
     }
 };
 
@@ -117,4 +135,4 @@ document.getElementById('checkout').onclick = checkout;
 
 // Загрузка страницы
 displayProducts('all');
-updateCart();
+loadCartFromLocalStorage();  // Загружаем корзину из LocalStorage
