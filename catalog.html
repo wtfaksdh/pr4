@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Искусство эспрессо</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ Искусство эспрессо</h1>
+            <hr>
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                </ul>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+            <h2>Каталог товаров</h2>
+            
+            <!-- Фильтр -->
+            <div class="filter">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="low">До 30000 ₽</button>
+                <button class="filter-btn" data-filter="medium">30000-60000 ₽</button>
+                <button class="filter-btn" data-filter="high">От 60000 ₽</button>
+            </div>
+
+            <!-- Товары -->
+            <div class="catalog" id="catalog"></div>
+
+            <!-- Корзина -->
+            <div class="cart">
+                <h3>Корзина</h3>
+                <div id="cart-list"></div>
+                <div class="cart-sum">Итого: <span id="cart-total">0</span> ₽</div>
+                <button id="clear-cart">Очистить корзину</button>
+                <button id="checkout">Оплатить</button>
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            <p>&copy; 2024 Искусство эспрессо. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
